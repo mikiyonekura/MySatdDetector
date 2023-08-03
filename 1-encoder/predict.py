@@ -1,14 +1,13 @@
-from train import tokenizer, model, prepare_data, SATDDataset, training_args, trainer 
 import torch
 
-def predict_satd(comment):
+def predict_satd(comment, model, tokenizer):
     text = comment
-    inputs = tokenizer(text, truncation=True, padding=True, return_tensors="pt").to('mps')
+    inputs = tokenizer(text, truncation=True, padding=True, return_tensors="pt")
     
     # GPUが利用可能であれば使用します
     if torch.cuda.is_available():
-        inputs = {k: v.to('mps') for k, v in inputs.items()}
-        model.to('mps')
+        inputs = {k: v.to('cuda') for k, v in inputs.items()}
+        model.to('cuda')
     
     # モデルの推論モードを設定し、出力を得ます
     model.eval()
@@ -25,5 +24,6 @@ def predict_satd(comment):
     return {"non_satd_prob": non_satd_prob, "satd_prob": satd_prob}
 
 
+
 if __name__ == "__main__":
-    print("import predict")
+    predict_satd("This is a hack, need to fix in future", model, tokenizer)

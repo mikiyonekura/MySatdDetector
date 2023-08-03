@@ -8,6 +8,8 @@ transformers = "*"
 torch = "*"
 scikit-learn = "*"
 accelerate = "*"
+seaborn = "*"
+matplotlib = "*"
 
 [dev-packages]
 
