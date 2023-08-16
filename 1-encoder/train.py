@@ -31,10 +31,10 @@ def train():
             return len(self.labels)
 
     # ファイルからデータを読み込む
-    with open('dataset/data--Argo-Hive-mini.txt', 'r') as f:
+    with open('dataset/data--Argo-Hive-re.txt', 'r') as f:
         comments = [line.strip() for line in f.readlines()]  # 各行を読み込み、改行文字を取り除く
 
-    with open('dataset/label--Argo-Hive-mini.txt', 'r') as f:
+    with open('dataset/label--Argo-Hive-re.txt', 'r') as f:
         # "positive" を 1 に、"false" を 0 にマッピング
         labels = [1 if line.strip() == 'positive' else 0 for line in f.readlines()]  
 
@@ -70,12 +70,12 @@ def train():
     trainer.train()
 
     # モデルの保存
-    trainer.save_model("./trained/trained_model-Argo-Hive-mini")
+    trainer.save_model("./trained/trained_model-Argo-Hive-re")
 
-    # 学習したモデルをロードします
-    trained_model = RobertaForSequenceClassification.from_pretrained("trained_model")
+    # # 学習したモデルをロードします
+    # trained_model = RobertaForSequenceClassification.from_pretrained("trained_model")
 
-    return trained_model, tokenizer
+    
 
 if __name__ == '__main__':
     train()

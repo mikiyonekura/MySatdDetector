@@ -6,15 +6,15 @@ from transformers import RobertaTokenizerFast, RobertaForSequenceClassification,
 # trained_model, tokenizer = train.train()
 tokenizer = RobertaTokenizerFast.from_pretrained("microsoft/codebert-base")
 #自作のtrained_model
-trained_model = RobertaForSequenceClassification.from_pretrained("trained/trained_model-Argo-Hive-mini")
+trained_model = RobertaForSequenceClassification.from_pretrained("trained/trained_model-Argo-Hive-re")
 
 # コメントを用意します
 
 # ファイルからデータを読み込む
-with open('dataset/data--Ant-mini.txt', 'r') as f:
+with open('dataset/data--Ant_reshaped.txt', 'r') as f:
     comments = [line.strip() for line in f.readlines()]  # 各行を読み込み、改行文字を取り除く
 
-with open('dataset/label--Ant-mini.txt', 'r') as f:
+with open('dataset/label--Ant_reshaped.txt', 'r') as f:
     # "positive" を 1 に、"false" を 0 にマッピング
     labels = [1 if line.strip() == 'positive' else 0 for line in f.readlines()]  
 
