@@ -6,7 +6,11 @@ from transformers import RobertaTokenizerFast, RobertaForSequenceClassification,
 # trained_model, tokenizer = train.train()
 tokenizer = RobertaTokenizerFast.from_pretrained("microsoft/codebert-base")
 #自作のtrained_model
-trained_model = RobertaForSequenceClassification.from_pretrained("trained/trained_model-Argo-Hive-re")
+
+#====================================================================
+# trained_model = RobertaForSequenceClassification.from_pretrained("trained/trained_model-Argo-Hive-re")
+#====================================================================
+trained_model = RobertaForSequenceClassification.from_pretrained("trainedNew/trained_model-Merge--9")
 
 # コメントを用意します
 

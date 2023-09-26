@@ -31,10 +31,16 @@ def train():
             return len(self.labels)
 
     # ファイルからデータを読み込む
-    with open('dataset/data--Argo-Hive-re.txt', 'r') as f:
+    #====================================
+    # with open('dataset/data--Argo-Hive-re.txt', 'r') as f:
+    #====================================
+    with open('datasetNew/1-original/data--Merge--5.txt', 'r') as f:
         comments = [line.strip() for line in f.readlines()]  # 各行を読み込み、改行文字を取り除く
 
-    with open('dataset/label--Argo-Hive-re.txt', 'r') as f:
+    #====================================
+    # with open('dataset/label--Argo-Hive-re.txt', 'r') as f:
+    #====================================
+    with open('datasetNew/1-label/label--Merge--5.txt', 'r') as f:
         # "positive" を 1 に、"false" を 0 にマッピング
         labels = [1 if line.strip() == 'positive' else 0 for line in f.readlines()]  
 
@@ -50,7 +56,10 @@ def train():
 
     # 学習設定
     training_args = TrainingArguments(
-        output_dir='./results',
+        #====================================
+        # output_dir='./results',
+        #====================================
+        output_dir='./resultsNew',
         num_train_epochs=3,
         per_device_train_batch_size=4,
         per_device_eval_batch_size=16,
@@ -70,7 +79,11 @@ def train():
     trainer.train()
 
     # モデルの保存
-    trainer.save_model("./trained/trained_model-Argo-Hive-re")
+
+    #====================================
+    # trainer.save_model("./trained/trained_model-Argo-Hive-re")
+    #====================================
+    trainer.save_model("./trainedNew/trained_model-Merge--5")  
 
     # # 学習したモデルをロードします
     # trained_model = RobertaForSequenceClassification.from_pretrained("trained_model")
@@ -78,4 +91,5 @@ def train():
     
 
 if __name__ == '__main__':
+    print(f"datasetNew/data--Merge--5.txtに対してtrain.pyを実行")
     train()
