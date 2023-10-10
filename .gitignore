@@ -3,3 +3,7 @@ Pipfile.lock
 dataset
 results
 trained
+datasetNew/
+resultsNew/
+src2abs/
+trainedNew/
