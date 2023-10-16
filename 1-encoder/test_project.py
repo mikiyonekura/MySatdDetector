@@ -16,21 +16,23 @@ trained_model = RobertaForSequenceClassification.from_pretrained("trainedNew/tra
 # コメントを用意します
 
 # ファイルからデータを読み込む
-with open('dataset/data--Ant-Hivernate_reshaped.txt', 'r') as f:
+with open('dataset/data--Ant-Hivernate-SQ.txt', 'r') as f:
     comments = [line.strip() for line in f.readlines()]  # 各行を読み込み、改行文字を取り除く
 
-    pre_comments = []
-    for comment in comments:
-        pre_comment = pre.standardize(comment)
-        print(f"====Brefore: {comment}==============")
-        print(f"====After: {pre_comment}============")
-        pre_comments.append(pre_comment)
+    #前処理を入れる場合
+    # pre_comments = []
+    # for comment in comments:
+    #     pre_comment = pre.standardize(comment)
+    #     print(f"====Brefore: {comment}==============")
+    #     print(f"====After: {pre_comment}============")
+    #     pre_comments.append(pre_comment)
 
-with open('dataset/label--Ant-Hivernate_reshaped.txt', 'r') as f:
+with open('dataset/label--Ant-Hivernate-SQ.txt', 'r') as f:
     # "positive" を 1 に、"false" を 0 にマッピング
     labels = [1 if line.strip() == 'positive' else 0 for line in f.readlines()]  
 
-data = [{'comment': c, 'label': l} for c, l in zip(pre_comments, labels)]
+#前処理を入れる場合pre_commentsを使う
+data = [{'comment': c, 'label': l} for c, l in zip(comments, labels)]
 for i in data:
     print(i)
 

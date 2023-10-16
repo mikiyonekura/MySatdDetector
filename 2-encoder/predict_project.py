@@ -9,8 +9,13 @@ def predict_satd(data, model, tokenizer):
     predicted_labels = []
 
     for d in data:
+        # 単に文字列で連結した場合
         text = d["comment"]+d["code"]
         inputs = tokenizer(text, truncation=True, padding=True, return_tensors="pt")
+
+        # SEPを間に組み込みたい場合
+        # inputs = tokenizer(d["comment"], d["code"], truncation=True, padding=True, return_tensors="pt")
+
         
         # If available use GPU
         if torch.cuda.is_available():
@@ -37,7 +42,7 @@ def predict_satd(data, model, tokenizer):
         predicted_labels.append(predicted_label)
 
         print("---------------------------------")
-        print(f"comment&code: {text}")
+        print(f"comment&code: {d['comment']}{d['code']}")
         print(f"true label: {d['label']}")
         print(f"predicted label: {predicted_label}")
         print(f"non_satd_prob: {non_satd_prob}",f"satd_prob: {satd_prob}")

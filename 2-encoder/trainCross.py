@@ -25,11 +25,11 @@ def train():
     def prepare_data(data):
 
         #前の実装
-        # texts = [f"{x['comment']} {x['code']}" for x in data]
-        # encodings = tokenizer(texts, truncation=True, padding=True)
+        texts = [f"{x['comment']} {x['code']}" for x in data]
+        encodings = tokenizer(texts, truncation=True, padding=True)
 
         #引数を分けて入力してあげると間にSEPが入るらしい
-        encodings = tokenizer([x['comment'] for x in data], [x['code'] for x in data], truncation=True, padding=True, return_tensors="pt")
+        # encodings = tokenizer([x['comment'] for x in data], [x['code'] for x in data], truncation=True, padding=True, return_tensors="pt")
         labels = [x['label'] for x in data]
 
         return encodings, labels
@@ -87,7 +87,7 @@ def train():
     )
 
     trainer.train()
-    trainer.save_model("./trainedNew/trained_model-Merge--9--2--sep")
+    trainer.save_model("./trainedNew/trained_model-Merge--9--2")
 
 if __name__ == '__main__':
     train()
